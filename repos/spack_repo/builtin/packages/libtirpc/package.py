@@ -70,3 +70,9 @@ class Libtirpc(AutotoolsPackage):
         if self.spec.satisfies("@1.3.3 platform=darwin"):
             return ["--disable-gssapi"]
         return []
+
+    def flag_handler(self, name, flags):
+        if self.spec.satisfies("%gcc@15:"):
+            if name == "cflags":
+                flags.append("-std=gnu17")
+        return super().flag_handler(name, flags)
