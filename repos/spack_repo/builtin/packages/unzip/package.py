@@ -23,6 +23,7 @@ class Unzip(MakefilePackage):
     # There is no problem with it on gcc, so make it a catch all
     patch("configure-cflags.patch")
     patch("strip.patch")
+    patch("gcc15.patch", when="%gcc@15:")
 
     # Fixed a buffer overflow
     # https://src.fedoraproject.org/rpms/unzip/c/2ee90c9b5cc4e48e4481f40f08153d1a335b701f
