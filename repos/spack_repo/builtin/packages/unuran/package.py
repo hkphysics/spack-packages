@@ -37,6 +37,8 @@ class Unuran(AutotoolsPackage):
     depends_on("gsl", when="+gsl")
     depends_on("rngstreams", when="+rngstreams")
 
+    # fix declarations - required for gcc15
+    patch("pinv-declare.patch", when="@1.8.1")
     def configure_args(self):
         spec = self.spec
 

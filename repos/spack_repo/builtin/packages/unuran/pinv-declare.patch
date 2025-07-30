@@ -1,0 +1,13 @@
+diff --git a/src/methods/pinv.c b/src/methods/pinv.c
+index 6a053db..0387782 100644
+--- a/src/methods/pinv.c
++++ b/src/methods/pinv.c
+@@ -440,7 +440,7 @@ static int _unur_pinv_linear_testpoints (double *utest, double *ui, int order);
+ /* [2c.] create table of test points for linear interpolation                */
+ /*---------------------------------------------------------------------------*/
+ 
+-static int _unur_pinv_cubic_hermite_is_monotone();
++static int _unur_pinv_cubic_hermite_is_monotone(struct unur_gen *gen, double *ui, double *zi, double *xval);
+ /*---------------------------------------------------------------------------*/
+ /* [2c.] check monotonicity of cubic Hermite interpolation                   */
+ /*---------------------------------------------------------------------------*/
