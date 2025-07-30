@@ -1,0 +1,26 @@
+diff --git a/deps/v8/src/builtins/builtins-descriptors.h b/deps/v8/src/builtins/builtins-descriptors.h
+index 4e67026..c2228c6 100644
+--- a/deps/v8/src/builtins/builtins-descriptors.h
++++ b/deps/v8/src/builtins/builtins-descriptors.h
+@@ -15,8 +15,8 @@ namespace internal {
+ #ifdef V8_JS_LINKAGE_INCLUDES_DISPATCH_HANDLE
+ #define DEFINE_TFJ_PARAMETER_INDICES(...)     \
+   enum ParameterIndices {                     \
+-    kJSTarget = kJSCallClosureParameterIndex, \
+-    ##__VA_ARGS__,                            \
++    kJSTarget = kJSCallClosureParameterIndex __VA_OPT__(,)	\
++    __VA_ARGS__,                              \
+     kJSNewTarget,                             \
+     kJSActualArgumentsCount,                  \
+     kJSDispatchHandle,                        \
+@@ -27,8 +27,8 @@ constexpr size_t kJSBuiltinBaseParameterCount = 4;
+ #else
+ #define DEFINE_TFJ_PARAMETER_INDICES(...)     \
+   enum ParameterIndices {                     \
+-    kJSTarget = kJSCallClosureParameterIndex, \
+-    ##__VA_ARGS__,                            \
++    kJSTarget = kJSCallClosureParameterIndex __VA_OPT__(,) \
++    __VA_ARGS__,                            \
+     kJSNewTarget,                             \
+     kJSActualArgumentsCount,                  \
+     kContext,                                 \
