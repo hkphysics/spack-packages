@@ -110,3 +110,8 @@ class Xgboost(CMakePackage, CudaPackage):
             ]
 
         return args
+
+    def flag_handler(self, name, flags):
+        if self.spec.satisfies("%gcc@14:") and name == "cxxflags":
+            flags.append("-std=c++17")
+        return super().flag_handler(name, flags)
