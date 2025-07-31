@@ -42,6 +42,9 @@ class PyGosam(PythonPackage):
     depends_on("python@3:", type=("build", "run"))
     depends_on("py-setuptools", type="build")
 
+    depends_on("py-setuptools", when="^python@3.12:")
+    patch("setuptools.patch", when="^python@3.12:")
+
     def setup_run_environment(self, env: EnvironmentModifications) -> None:
         gosam_contrib_lib_dir = self.spec["gosam-contrib"].prefix.lib
         env.prepend_path("LD_LIBRARY_PATH", gosam_contrib_lib_dir)
