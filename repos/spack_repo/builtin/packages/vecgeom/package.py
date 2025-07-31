@@ -98,6 +98,7 @@ class Vecgeom(CMakePackage, CudaPackage):
     depends_on("veccore@0.8.0:0.8", when="@1.1.18:")
 
     conflicts("+cuda", when="@:1.1.5")
+    conflicts("%gcc@15:", when="@:1.2.11")
 
     # Fix empty -Xcompiler= with nvcc
     patch(
