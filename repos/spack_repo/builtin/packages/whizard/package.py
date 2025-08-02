@@ -208,3 +208,9 @@ class Whizard(AutotoolsPackage):
                 patch,
             )
         return url
+
+    def flag_handler(self, name, flags):
+        if self.spec.satisfies("%gcc@15:"):
+            if name == "cflags":
+                flags.append("-std=gnu17")
+        return super().flag_handler(name, flags)
