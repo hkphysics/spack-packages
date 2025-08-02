@@ -79,3 +79,8 @@ class Freeglut(CMakePackage, SourceforgePackage):
     @property
     def libs(self):
         return find_libraries(["libglut"], root=self.prefix, recursive=True)
+
+    def flag_handler(self, name, flags):
+        if self.spec.satisfies("%gcc@15:") and name == "cflags":
+            flags.append("-std=gnu17")
+        return super().flag_handler(name, flags)
