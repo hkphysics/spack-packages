@@ -277,3 +277,8 @@ class Rust(Package):
 
     # known issue: https://github.com/rust-lang/rust/issues/132604
     unresolved_libraries = ["libz.so.*"]
+
+    def flag_handler(self, name, flags):
+        if self.spec.satisfies("%gcc@14:") and name == "cxxflags":
+            flags.append("-std=c++17")
+        return super().flag_handler(name, flags)
