@@ -101,6 +101,9 @@ class Whizard(AutotoolsPackage):
 
     # Subset of https://gitlab.tp.nt.uni-siegen.de/whizard/public/-/commit/f6048e4
     patch("hepmc3.3.0.patch", when="@3:3.1.4^hepmc3@3.3.0:")
+
+    # add patch to decl functions
+    patch("add-decl.patch", when="%gcc@15:")
     # Make sure that the patch actually has an effect by running autoreconf
     force_autoreconf = True
     # Which then requires the following build dependencies
@@ -208,9 +211,3 @@ class Whizard(AutotoolsPackage):
                 patch,
             )
         return url
-
-    def flag_handler(self, name, flags):
-        if self.spec.satisfies("%gcc@15:"):
-            if name == "cflags":
-                flags.append("-std=gnu17")
-        return super().flag_handler(name, flags)
