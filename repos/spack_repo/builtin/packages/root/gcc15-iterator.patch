@@ -1,0 +1,13 @@
+diff --git a/interpreter/llvm-project/llvm/include/llvm/ADT/iterator.h b/interpreter/llvm-project/llvm/include/llvm/ADT/iterator.h
+index 6f0c42f..308357f 100644
+--- a/interpreter/llvm-project/llvm/include/llvm/ADT/iterator.h
++++ b/interpreter/llvm-project/llvm/include/llvm/ADT/iterator.h
+@@ -267,7 +267,7 @@ public:
+     return *static_cast<DerivedT *>(this);
+   }
+   using BaseT::operator-;
+-  difference_type operator-(const DerivedT &RHS) const {
++  difference_type operator-(const DerivedT &RHS) const requires (bool(BaseT::IsRandomAccess))  {
+     static_assert(
+         BaseT::IsRandomAccess,
+         "The '-' operator is only defined for random access iterators.");

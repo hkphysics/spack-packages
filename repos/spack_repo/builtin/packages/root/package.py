@@ -189,6 +189,11 @@ class Root(CMakePackage):
             when="@6.28:6.32 +python",
         )
 
+        #https://github.com/llvm/llvm-project/issues/139072
+        patch(
+            "gcc15-iterator.patch", when="@:6.36.02 %gcc@15:"
+        )
+
     # ###################### Variants ##########################
     # See README.md for specific notes about what ROOT configuration
     # options are or are not supported, and why.
