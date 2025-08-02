@@ -1,7 +1,16 @@
 diff --git a/interpreter/llvm-project/llvm/include/llvm/ADT/iterator.h b/interpreter/llvm-project/llvm/include/llvm/ADT/iterator.h
-index 6f0c42f..308357f 100644
+index 6f0c42f..d792448 100644
 --- a/interpreter/llvm-project/llvm/include/llvm/ADT/iterator.h
 +++ b/interpreter/llvm-project/llvm/include/llvm/ADT/iterator.h
+@@ -142,7 +142,7 @@ public:
+         "The '+' operator is only defined for random access iterators.");
+     return i + n;
+   }
+-  DerivedT operator-(DifferenceTypeT n) const {
++  DerivedT operator-(DifferenceTypeT n) const requires (bool(IsRandomAccess)) {
+     static_assert(
+         IsRandomAccess,
+         "The '-' operator is only defined for random access iterators.");
 @@ -267,7 +267,7 @@ public:
      return *static_cast<DerivedT *>(this);
    }
