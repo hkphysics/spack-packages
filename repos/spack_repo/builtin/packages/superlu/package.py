@@ -87,6 +87,12 @@ class Superlu(CMakePackage):
 
         return args
 
+    def flag_handler(self, name, flags):
+        if self.spec.satisfies("%gcc@15:"):
+            if name == "cflags":
+                flags.append("-std=gnu17")
+        return super().flag_handler(name, flags)
+
     @run_after("install")
     def setup_standalone_tests(self):
         """Set up and copy example source files after the package is installed
