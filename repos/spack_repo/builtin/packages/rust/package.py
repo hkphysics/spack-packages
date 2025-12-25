@@ -275,5 +275,11 @@ class Rust(Package):
     def install(self, spec, prefix):
         python("./x.py", "install", "-j", str(make_jobs))
 
+    def flag_handler(self, name, flags):
+        if self.spec.satisfies("%gcc@15:"):
+            if name == "cflags":
+                flags.append("-std=c++20")
+        return super().flag_handler(name, flags)
+
     # known issue: https://github.com/rust-lang/rust/issues/132604
     unresolved_libraries = ["libz.so.*"]
