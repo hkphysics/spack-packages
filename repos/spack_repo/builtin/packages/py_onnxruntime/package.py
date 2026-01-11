@@ -26,6 +26,7 @@ class PyOnnxruntime(CMakePackage, PythonExtension, ROCmPackage, CudaPackage):
 
     license("MIT")
 
+    version("1.23.3", tag="v1.23.3", commit="a83fc4d58cb48eb68890dd689f94f28288cf2278")
     version("1.22.2", tag="v1.22.2", commit="5630b081cd25e4eccc7516a652ff956e51676794")
     version("1.21.1", tag="v1.21.1", commit="8f7cce3a49fdbdac96e0868b75b7d0159db7ac7f")
     version("1.21.0", tag="v1.21.0", commit="e0b66cad282043d4377cea5269083f17771b6dfc")
@@ -40,6 +41,7 @@ class PyOnnxruntime(CMakePackage, PythonExtension, ROCmPackage, CudaPackage):
     version("1.10.0", tag="v1.10.0", commit="0d9030e79888d1d5828730b254fedc53c7b640c1")
     version("1.7.2", tag="v1.7.2", commit="5bc92dff16b0ddd5063b717fb8522ca2ad023cb0")
 
+    conflicts("%gcc@15:", when="@:1.22.2", msg="missing cstdint header")
     depends_on("c", type="build")
     depends_on("cxx", type="build")
 
