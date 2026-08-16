@@ -58,6 +58,15 @@ class Gmp(AutotoolsPackage, GNUMirrorPackage):
     # shared library support. Regenerating it fixes the issue.
     force_autoreconf = True
 
+    def configure_args(self):
+        args = self.enable_or_disable("cxx")
+        args += self.enable_or_disable("libs")
+        if self.spec.satisfies("libs=static"):
+            args.append("--with-pic")
+        # Add --disable-dependency-tracking to avoid configure issues
+        args.append("--disable-dependency-tracking")
+        return args
+
     def flag_handler(self, name, flags):
         # Work around macOS Catalina / Xcode 11 code generation bug
         # (test failure t-toom53, due to wrong code in mpn/toom53_mul.o)
@@ -67,10 +76,3 @@ class Gmp(AutotoolsPackage, GNUMirrorPackage):
         elif self.spec.satisfies("%intel") and name == "cxxflags":
             flags.append("-no-ftz")
         return (flags, None, None)
-
-    def configure_args(self):
-        args = self.enable_or_disable("cxx")
-        args += self.enable_or_disable("libs")
-        if self.spec.satisfies("libs=static"):
-            args.append("--with-pic")
-        return args
