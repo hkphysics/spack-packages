@@ -12,7 +12,7 @@ class Njet(AutotoolsPackage):
     in massless QCD."""
 
     homepage = "https://bitbucket.org/njet/njet/wiki/Home"
-    url = "https://bitbucket.org/njet/njet/downloads/njet-2.1.1.tar.gz"
+    url = "https://bitbucket.org/njet/njet/get/3.1.2.tar.gz"
 
     tags = ["hep"]
 
